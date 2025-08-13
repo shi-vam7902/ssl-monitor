@@ -14,6 +14,16 @@ import {
 } from "@/types/api";
 
 export class SSLService {
+  private static mapStatsFromApi(raw: any): DashboardStats {
+    return {
+      totalDomains: raw.totalDomains ?? 0,
+      validCertificates: raw.validCertificates ?? 0,
+      expiringSoon: raw.expiringSoon ?? raw.expiringCertificates ?? 0,
+      expired: raw.expired ?? raw.expiredCertificates ?? 0,
+      recentlyChecked: raw.recentlyChecked,
+      byEnvironment: raw.byEnvironment,
+    } as DashboardStats;
+  }
   private static mapRecordFromApi(record: any): SSLAlert {
     return {
       id: record._id || record.id,
@@ -99,10 +109,8 @@ export class SSLService {
    */
   static async getSSLStats(): Promise<DashboardStats> {
     try {
-      const response = await api.get<ApiResponse<DashboardStats>>(
-        API_ROUTES.ssl.stats,
-      );
-      return response.data.data;
+      const response = await api.get<ApiResponse<any>>(API_ROUTES.ssl.stats);
+      return this.mapStatsFromApi(response.data.data);
     } catch (error) {
       console.error("Get SSL stats error:", error);
       throw error;
@@ -116,8 +124,8 @@ export class SSLService {
       const url = environment
         ? `${API_ROUTES.ssl.stats}?environment=${environment}`
         : API_ROUTES.ssl.stats;
-      const response = await api.get<ApiResponse<DashboardStats>>(url);
-      return response.data.data;
+      const response = await api.get<ApiResponse<any>>(url);
+      return this.mapStatsFromApi(response.data.data);
     } catch (error) {
       console.error("Get SSL stats by env error:", error);
       throw error;

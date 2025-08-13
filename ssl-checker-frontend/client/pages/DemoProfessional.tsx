@@ -395,15 +395,15 @@ export default function DemoProfessional() {
               <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                 <div>
                   <p className="text-xs text-muted-foreground">Development</p>
-                  <p className="text-2xl font-semibold">{(stats as any).byEnvironment?.development ?? 0}</p>
+                  <p className="text-2xl font-semibold">{(stats as any)?.byEnvironment?.development ?? 0}</p>
                 </div>
                 <div>
                   <p className="text-xs text-muted-foreground">Staging</p>
-                  <p className="text-2xl font-semibold">{(stats as any).byEnvironment?.staging ?? 0}</p>
+                  <p className="text-2xl font-semibold">{(stats as any)?.byEnvironment?.staging ?? 0}</p>
                 </div>
                 <div>
                   <p className="text-xs text-muted-foreground">Production</p>
-                  <p className="text-2xl font-semibold">{(stats as any).byEnvironment?.production ?? 0}</p>
+                  <p className="text-2xl font-semibold">{(stats as any)?.byEnvironment?.production ?? 0}</p>
                 </div>
               </div>
             </CardContent>
