@@ -52,7 +52,7 @@ export class AuthService {
   ): Promise<void> {
     try {
       await api.put<ApiResponse<{ message: string }>>(
-        API_ROUTES.users.changePassword,
+        API_ROUTES.auth.changePassword,
         changePasswordDto,
       );
     } catch (error) {

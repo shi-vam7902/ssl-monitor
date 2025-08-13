@@ -33,14 +33,12 @@ export default function Login() {
 
     try {
       await login(email, password);
-      toast({ title: 'Login successful', description: 'Redirecting to dashboard...' });
       navigate('/dashboard', { replace: true });
     } catch (error: any) {
       setError(
-        error.response?.data?.message || 
+        error?.response?.data?.message || 
         'Login failed. Please check your credentials.'
       );
-      toast({ title: 'Login failed', description: 'Please check your email and password.', variant: 'destructive' as any });
     } finally {
       setIsSubmitting(false);
     }
@@ -50,10 +48,8 @@ export default function Login() {
     switch (theme) {
       case 'dark':
         return 'from-slate-900 to-slate-800';
-      case 'company':
-        return 'from-blue-50 to-blue-100';
-      case 'ssl-monitor':
-        return 'from-slate-50 to-blue-50';
+      case 'light':
+        return 'from-slate-50 to-slate-100';
       default:
         return 'from-slate-50 to-slate-100';
     }

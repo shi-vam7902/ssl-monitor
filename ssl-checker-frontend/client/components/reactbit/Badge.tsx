@@ -16,6 +16,7 @@ const badgeVariants = cva(
         info: "border-transparent bg-blue-500 text-white shadow-md hover:bg-blue-600 hover:shadow-lg",
         gradient: "border-transparent bg-gradient-to-r from-primary to-primary-foreground text-white shadow-md hover:shadow-lg",
         glass: "border-white/20 bg-white/10 backdrop-blur-sm text-foreground hover:bg-white/20",
+        ghost: "border-transparent bg-transparent text-foreground",
       },
       size: {
         sm: "px-2 py-0.5 text-xs",

@@ -1,7 +1,13 @@
 // Centralized API route constants for frontend usage
-// Use these constants across services and components
+// Ensures the API prefix includes exactly one "/api" segment
 
-export const API_PREFIX = `${import.meta.env.VITE_API_BASE_URL}/api`; // baseURL already contains /api
+const RAW_BASE_URL = (import.meta.env.VITE_API_BASE_URL || "").replace(
+  /\/+$/g,
+  "",
+);
+export const API_PREFIX = RAW_BASE_URL.endsWith("/api")
+  ? RAW_BASE_URL
+  : `${RAW_BASE_URL}/api`;
 console.log("API_PREFIX", API_PREFIX);
 export const API_ROUTES = {
   // Authentication routes
