@@ -1,0 +1,349 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  /**
+   * Tailwind CSS theme with company variations
+   * Multiple theme support: light, dark, company, ssl-monitor
+   */
+  
+  /* Light Theme (Default) */
+  :root,
+  .light {
+    --background: 0 0% 100%;
+    --foreground: 222.2 84% 4.9%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 222.2 84% 4.9%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 222.2 84% 4.9%;
+
+    --primary: 221.2 83.2% 53.3%;
+    --primary-foreground: 210 40% 98%;
+
+    --secondary: 210 40% 96.1%;
+    --secondary-foreground: 222.2 47.4% 11.2%;
+
+    --muted: 210 40% 96.1%;
+    --muted-foreground: 215.4 16.3% 46.9%;
+
+    --accent: 210 40% 96.1%;
+    --accent-foreground: 222.2 47.4% 11.2%;
+
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 214.3 31.8% 91.4%;
+    --input: 214.3 31.8% 91.4%;
+    --ring: 221.2 83.2% 53.3%;
+
+    --radius: 0.75rem;
+
+    --sidebar-background: 0 0% 98%;
+    --sidebar-foreground: 240 5.3% 26.1%;
+    --sidebar-primary: 240 5.9% 10%;
+    --sidebar-primary-foreground: 0 0% 98%;
+    --sidebar-accent: 240 4.8% 95.9%;
+    --sidebar-accent-foreground: 240 5.9% 10%;
+    --sidebar-border: 220 13% 91%;
+    --sidebar-ring: 217.2 91.2% 59.8%;
+  }
+
+  /* Dark Theme */
+  .dark {
+    --background: 222.2 84% 4.9%;
+    --foreground: 210 40% 98%;
+
+    --card: 222.2 84% 4.9%;
+    --card-foreground: 210 40% 98%;
+
+    --popover: 222.2 84% 4.9%;
+    --popover-foreground: 210 40% 98%;
+
+    --primary: 217.2 91.2% 59.8%;
+    --primary-foreground: 222.2 47.4% 11.2%;
+
+    --secondary: 217.2 32.6% 17.5%;
+    --secondary-foreground: 210 40% 98%;
+
+    --muted: 217.2 32.6% 17.5%;
+    --muted-foreground: 215 20.2% 65.1%;
+
+    --accent: 217.2 32.6% 17.5%;
+    --accent-foreground: 210 40% 98%;
+
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 217.2 32.6% 17.5%;
+    --input: 217.2 32.6% 17.5%;
+    --ring: 217.2 91.2% 59.8%;
+
+    --sidebar-background: 240 5.9% 10%;
+    --sidebar-foreground: 240 4.8% 95.9%;
+    --sidebar-primary: 224.3 76.3% 48%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 240 3.7% 15.9%;
+    --sidebar-accent-foreground: 240 4.8% 95.9%;
+    --sidebar-border: 240 3.7% 15.9%;
+    --sidebar-ring: 217.2 91.2% 59.8%;
+  }
+
+  /* Company Theme - Professional Blue */
+  .company {
+    --background: 210 20% 98%;
+    --foreground: 210 100% 15%;
+
+    --card: 210 20% 99%;
+    --card-foreground: 210 100% 15%;
+
+    --popover: 210 20% 99%;
+    --popover-foreground: 210 100% 15%;
+
+    --primary: 221.2 83.2% 53.3%;
+    --primary-foreground: 210 40% 98%;
+
+    --secondary: 210 40% 96.1%;
+    --secondary-foreground: 210 100% 15%;
+
+    --muted: 210 40% 96.1%;
+    --muted-foreground: 210 100% 25%;
+
+    --accent: 210 40% 96.1%;
+    --accent-foreground: 210 100% 15%;
+
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 214.3 31.8% 91.4%;
+    --input: 214.3 31.8% 91.4%;
+    --ring: 221.2 83.2% 53.3%;
+
+    --sidebar-background: 210 20% 96%;
+    --sidebar-foreground: 210 100% 15%;
+    --sidebar-primary: 221.2 83.2% 53.3%;
+    --sidebar-primary-foreground: 210 40% 98%;
+    --sidebar-accent: 210 40% 96.1%;
+    --sidebar-accent-foreground: 210 100% 15%;
+    --sidebar-border: 214.3 31.8% 91.4%;
+    --sidebar-ring: 221.2 83.2% 53.3%;
+  }
+
+  /* SSL Monitor Theme - Security Focused */
+  .ssl-monitor {
+    --background: 220 14% 96%;
+    --foreground: 220 9% 46%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 220 9% 46%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 220 9% 46%;
+
+    --primary: 142 76% 36%;
+    --primary-foreground: 355 7% 97%;
+
+    --secondary: 220 14% 96%;
+    --secondary-foreground: 220 9% 46%;
+
+    --muted: 220 14% 96%;
+    --muted-foreground: 220 8% 46%;
+
+    --accent: 220 14% 96%;
+    --accent-foreground: 220 9% 46%;
+
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 210 20% 98%;
+
+    --border: 220 13% 91%;
+    --input: 220 13% 91%;
+    --ring: 142 76% 36%;
+
+    --sidebar-background: 220 14% 96%;
+    --sidebar-foreground: 220 9% 46%;
+    --sidebar-primary: 142 76% 36%;
+    --sidebar-primary-foreground: 355 7% 97%;
+    --sidebar-accent: 220 14% 96%;
+    --sidebar-accent-foreground: 220 9% 46%;
+    --sidebar-border: 220 13% 91%;
+    --sidebar-ring: 142 76% 36%;
+  }
+
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    font-feature-settings: "rlig" 1, "calt" 1;
+  }
+
+  /* Enhanced spacing utilities */
+  .space-y-enhanced > * + * {
+    margin-top: 2rem;
+  }
+
+  .space-x-enhanced > * + * {
+    margin-left: 2rem;
+  }
+
+  .p-enhanced {
+    padding: 2rem;
+  }
+
+  .px-enhanced {
+    padding-left: 2rem;
+    padding-right: 2rem;
+  }
+
+  .py-enhanced {
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+  }
+
+  .m-enhanced {
+    margin: 2rem;
+  }
+
+  .mx-enhanced {
+    margin-left: 2rem;
+    margin-right: 2rem;
+  }
+
+  .my-enhanced {
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+  }
+
+  /* Card enhancements */
+  .card-enhanced {
+    @apply rounded-xl border-0 shadow-xl;
+    padding: 1.5rem;
+  }
+
+  .card-header-enhanced {
+    @apply pb-6 mb-6 border-b border-border/50;
+  }
+
+  .card-content-enhanced {
+    @apply space-y-6;
+  }
+
+  /* Table enhancements */
+  .table-enhanced th {
+    @apply font-semibold text-base py-4 px-6;
+  }
+
+  .table-enhanced td {
+    @apply py-4 px-6;
+  }
+
+  /* Button enhancements */
+  .btn-enhanced {
+    @apply px-6 py-3 text-base font-medium rounded-lg transition-all duration-200;
+  }
+
+  .btn-primary-enhanced {
+    @apply bg-primary text-primary-foreground hover:bg-primary/90 shadow-lg;
+  }
+
+  .btn-secondary-enhanced {
+    @apply bg-secondary text-secondary-foreground hover:bg-secondary/80;
+  }
+
+  /* Modal enhancements */
+  .modal-enhanced {
+    @apply fixed inset-0 bg-background/80 backdrop-blur-sm z-50;
+  }
+
+  .modal-content-enhanced {
+    @apply w-full max-w-4xl mx-auto my-8 bg-card rounded-xl shadow-2xl border-0;
+  }
+
+  /* Loading states */
+  .loading-spinner {
+    @apply animate-spin;
+  }
+
+  .loading-skeleton {
+    @apply animate-pulse bg-muted rounded;
+  }
+
+  /* Responsive enhancements */
+  @media (max-width: 768px) {
+    .p-enhanced {
+      padding: 1rem;
+    }
+    
+    .px-enhanced {
+      padding-left: 1rem;
+      padding-right: 1rem;
+    }
+    
+    .py-enhanced {
+      padding-top: 1rem;
+      padding-bottom: 1rem;
+    }
+  }
+}
+
+@layer components {
+  /* Custom component styles */
+  .ssl-status-valid {
+    @apply bg-green-100 text-green-800 border-green-200;
+  }
+
+  .ssl-status-expiring {
+    @apply bg-orange-100 text-orange-800 border-orange-200;
+  }
+
+  .ssl-status-expired {
+    @apply bg-red-100 text-red-800 border-red-200;
+  }
+
+  .dashboard-card {
+    @apply bg-card border-0 shadow-xl rounded-xl p-6 hover:shadow-2xl transition-all duration-300;
+  }
+
+  .dashboard-stat {
+    @apply text-4xl font-bold;
+  }
+
+  .dashboard-stat-label {
+    @apply text-sm text-muted-foreground mt-2;
+  }
+
+  .action-button {
+    @apply px-4 py-2 rounded-lg font-medium transition-all duration-200 hover:scale-105;
+  }
+
+  .status-badge {
+    @apply px-3 py-1 rounded-full text-xs font-medium;
+  }
+}
+
+@layer utilities {
+  /* Custom utility classes */
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+
+  .gradient-text {
+    @apply bg-gradient-to-r from-primary to-primary/80 bg-clip-text text-transparent;
+  }
+
+  .glass-effect {
+    @apply bg-background/80 backdrop-blur-sm border border-border/50;
+  }
+}
