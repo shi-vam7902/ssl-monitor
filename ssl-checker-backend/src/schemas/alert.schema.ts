@@ -70,6 +70,13 @@ export class SSLRecord {
   @Prop()
   organization?: string;
 
+  @Prop({
+    type: String,
+    enum: ["development", "staging", "production"],
+    default: "production",
+  })
+  environment?: string;
+
   @Prop()
   renewalStatus?: string;
 

@@ -48,16 +48,20 @@ export const API_ROUTES = {
   // SSL management routes
   ssl: {
     root: `${API_PREFIX}/ssl`,
-    list: `${API_PREFIX}/ssl`,
+    // List uses alerts controller for richer filtering
+    list: `${API_PREFIX}/alerts`,
     create: `${API_PREFIX}/ssl`,
-    stats: `${API_PREFIX}/ssl/stats`,
-    checkDomain: `${API_PREFIX}/ssl/check-domain`,
-    refreshAll: `${API_PREFIX}/ssl/refresh-all`,
+    // Stats endpoint is under alerts controller
+    stats: `${API_PREFIX}/alerts/dashboard/stats`,
+    // checks and bulk refresh are handled by the alerts controller
+    checkDomain: `${API_PREFIX}/alerts/check-domain`,
+    refreshAll: `${API_PREFIX}/alerts/refresh-all`,
     byId: (id: string) => `${API_PREFIX}/ssl/${id}`,
     update: (id: string) => `${API_PREFIX}/ssl/${id}`,
     delete: (id: string) => `${API_PREFIX}/ssl/${id}`,
     renew: (id: string) => `${API_PREFIX}/ssl/${id}/renew`,
-    refresh: (id: string) => `${API_PREFIX}/ssl/${id}/refresh`,
+    // single refresh lives under alerts controller
+    refresh: (id: string) => `${API_PREFIX}/alerts/${id}/refresh`,
   },
 
   // Alert management routes

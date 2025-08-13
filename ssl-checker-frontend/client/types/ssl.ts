@@ -10,6 +10,7 @@ export interface SSLAlert {
   errorMessage?: string;
   serialNumber?: string;
   isActive?: boolean;
+  environment?: "development" | "staging" | "production";
   createdAt?: string;
   updatedAt?: string;
 }
@@ -20,12 +21,18 @@ export interface DashboardStats {
   expiringSoon: number;
   expired: number;
   recentlyChecked?: number;
+  byEnvironment?: {
+    development: number;
+    staging: number;
+    production: number;
+  };
 }
 
 export type DashboardLayout = "classic" | "professional";
 
 export interface CreateAlertDto {
   domain: string;
+  environment?: "development" | "staging" | "production";
 }
 
 export interface AlertQueryDto {
@@ -34,6 +41,7 @@ export interface AlertQueryDto {
   search?: string;
   status?: "valid" | "expiring" | "expired";
   daysRemaining?: number;
+  environment?: "development" | "staging" | "production";
 }
 
 export interface DomainCheckResult {

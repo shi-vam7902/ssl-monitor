@@ -14,6 +14,38 @@ import {
 } from "@/types/api";
 
 export class SSLService {
+  private static mapRecordFromApi(record: any): SSLAlert {
+    return {
+      id: record._id || record.id,
+      domain: record.domain,
+      expiryDate:
+        typeof record.expiryDate === "string"
+          ? record.expiryDate
+          : new Date(record.expiryDate).toISOString(),
+      status: record.status === "expiring" ? "expiring_soon" : record.status,
+      lastChecked:
+        typeof record.lastChecked === "string"
+          ? record.lastChecked
+          : new Date(record.lastChecked).toISOString(),
+      daysUntilExpiry: record.daysRemaining,
+      issuer: record.issuer || "",
+      certificate: record.certificate || "",
+      errorMessage: record.errorMessage,
+      serialNumber: record.serialNumber,
+      isActive: record.isActive,
+      environment: record.environment,
+      createdAt: record.createdAt
+        ? typeof record.createdAt === "string"
+          ? record.createdAt
+          : new Date(record.createdAt).toISOString()
+        : undefined,
+      updatedAt: record.updatedAt
+        ? typeof record.updatedAt === "string"
+          ? record.updatedAt
+          : new Date(record.updatedAt).toISOString()
+        : undefined,
+    } as SSLAlert;
+  }
   /**
    * Create a new SSL record
    */
@@ -25,7 +57,7 @@ export class SSLService {
         API_ROUTES.ssl.create,
         createAlertDto,
       );
-      return response.data.data;
+      return this.mapRecordFromApi(response.data.data);
     } catch (error) {
       console.error("Create SSL record error:", error);
       throw error;
@@ -48,10 +80,14 @@ export class SSLService {
         });
       }
 
-      const response = await api.get<ApiResponse<PaginatedResponse<SSLAlert>>>(
+      const response = await api.get<ApiResponse<PaginatedResponse<any>>>(
         `${API_ROUTES.ssl.list}?${params.toString()}`,
       );
-      return response.data.data;
+      const raw = response.data.data;
+      return {
+        ...raw,
+        docs: raw.docs.map((r: any) => this.mapRecordFromApi(r)),
+      };
     } catch (error) {
       console.error("Get SSL records error:", error);
       throw error;
@@ -73,15 +109,28 @@ export class SSLService {
     }
   }
 
+  static async getSSLStatsByEnvironment(
+    environment?: "development" | "staging" | "production",
+  ): Promise<DashboardStats> {
+    try {
+      const url = environment
+        ? `${API_ROUTES.ssl.stats}?environment=${environment}`
+        : API_ROUTES.ssl.stats;
+      const response = await api.get<ApiResponse<DashboardStats>>(url);
+      return response.data.data;
+    } catch (error) {
+      console.error("Get SSL stats by env error:", error);
+      throw error;
+    }
+  }
+
   /**
    * Get SSL record by ID
    */
   static async getSSLRecordById(id: string): Promise<SSLAlert> {
     try {
-      const response = await api.get<ApiResponse<SSLAlert>>(
-        API_ROUTES.ssl.byId(id),
-      );
-      return response.data.data;
+      const response = await api.get<ApiResponse<any>>(API_ROUTES.ssl.byId(id));
+      return this.mapRecordFromApi(response.data.data);
     } catch (error) {
       console.error("Get SSL record by ID error:", error);
       throw error;
@@ -96,11 +145,11 @@ export class SSLService {
     updateData: Partial<SSLAlert>,
   ): Promise<SSLAlert> {
     try {
-      const response = await api.patch<ApiResponse<SSLAlert>>(
+      const response = await api.patch<ApiResponse<any>>(
         API_ROUTES.ssl.update(id),
         updateData,
       );
-      return response.data.data;
+      return this.mapRecordFromApi(response.data.data);
     } catch (error) {
       console.error("Update SSL record error:", error);
       throw error;
@@ -159,10 +208,14 @@ export class SSLService {
    */
   static async refreshSSLRecord(id: string): Promise<SSLAlert> {
     try {
-      const response = await api.put<ApiResponse<SSLAlert>>(
+      // Accept both id and raw record for safety; if id is missing, throw early
+      if (!id) {
+        throw new Error("Missing SSL record id");
+      }
+      const response = await api.put<ApiResponse<any>>(
         API_ROUTES.ssl.refresh(id),
       );
-      return response.data.data;
+      return this.mapRecordFromApi(response.data.data);
     } catch (error) {
       console.error("Refresh SSL record error:", error);
       throw error;
@@ -174,10 +227,10 @@ export class SSLService {
    */
   static async renewSSLCertificate(id: string): Promise<SSLAlert> {
     try {
-      const response = await api.post<ApiResponse<SSLAlert>>(
+      const response = await api.post<ApiResponse<any>>(
         API_ROUTES.ssl.renew(id),
       );
-      return response.data.data;
+      return this.mapRecordFromApi(response.data.data);
     } catch (error) {
       console.error("Renew SSL certificate error:", error);
       throw error;

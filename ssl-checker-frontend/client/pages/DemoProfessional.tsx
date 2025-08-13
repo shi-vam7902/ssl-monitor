@@ -5,7 +5,7 @@ import { Button } from '@/components/reactbit/Button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/reactbit/Card';
 import { Badge } from '@/components/reactbit/Badge';
 import { SSLStatusBadge } from '@/components/reactbit/SSLStatusBadge';
-import { ThemeSelector } from '@/components/reactbit/ThemeSelector';
+// Theme controls removed per request
 import { AddDomainModal } from '@/components/AddDomainModal';
 import { ExpiredHistoryModal } from '@/components/ExpiredHistoryModal';
 import { SSLCertificateModal } from '@/components/SSLCertificateModal';
@@ -23,8 +23,8 @@ import {
   Monitor,
   TrendingUp,
   Activity,
-  Grid3X3,
-  Settings,
+  
+  
   Plus,
   History,
   Trash2,
@@ -38,6 +38,7 @@ type Theme = 'dark' | 'company' | 'ssl-monitor';
 export default function DemoProfessional() {
   const [isRefreshing, setIsRefreshing] = useState(false);
   const [showThemeSelector, setShowThemeSelector] = useState(false);
+  const [environmentFilter, setEnvironmentFilter] = useState<'all' | 'development' | 'staging' | 'production'>('all');
   const [showAddDomainModal, setShowAddDomainModal] = useState(false);
   const [showExpiredHistoryModal, setShowExpiredHistoryModal] = useState(false);
   const [alerts, setAlerts] = useState<SSLAlert[]>([]);
@@ -55,7 +56,7 @@ export default function DemoProfessional() {
   // Load data on component mount
   useEffect(() => {
     loadData();
-  }, []);
+  }, [environmentFilter]);
 
   // Auto-refresh every 5 minutes
   useEffect(() => {
@@ -72,8 +73,8 @@ export default function DemoProfessional() {
       setError('');
       
       const [alertsData, statsData] = await Promise.all([
-        sslService.getAlerts(),
-        sslService.getDashboardStats()
+        sslService.getAlerts(environmentFilter === 'all' ? undefined : { environment: environmentFilter } as any),
+        sslService.getSSLStatsByEnvironment(environmentFilter === 'all' ? undefined : environmentFilter)
       ]);
       
       setAlerts(alertsData);
@@ -187,41 +188,20 @@ export default function DemoProfessional() {
       <header className="bg-card/80 backdrop-blur-sm shadow-sm border-b border-border/50 sticky top-0 z-50">
         <div className="px-8 py-6">
           <div className="flex items-center justify-between">
-            <div className="flex items-center gap-6">
-              <div className="flex items-center gap-4">
-                <div className="w-12 h-12 bg-gradient-to-br from-primary to-primary-foreground rounded-xl flex items-center justify-center shadow-lg">
-                  <Shield className="w-7 h-7 text-white" />
-                </div>
-                <div>
-                  <h1 className="text-2xl font-bold text-foreground">SSL Monitor</h1>
-                  <div className="flex items-center gap-3">
-                    <p className="text-sm text-muted-foreground">Professional Dashboard</p>
-                    <Badge variant="gradient" size="sm">
-                      {theme.charAt(0).toUpperCase() + theme.slice(1).replace('-', ' ')}
-                    </Badge>
-                  </div>
-                </div>
+            <div className="flex items-center gap-4">
+              <div className="w-12 h-12 bg-gradient-to-br from-primary to-primary-foreground rounded-xl flex items-center justify-center shadow-lg">
+                <Shield className="w-7 h-7 text-white" />
+              </div>
+              <div>
+                <h1 className="text-2xl font-bold text-foreground">SSL Monitor</h1>
+                <p className="text-sm text-muted-foreground">Professional Dashboard</p>
               </div>
             </div>
             
             <div className="flex items-center gap-4">
-              <Button 
-                variant="outline"
-                size="sm"
-                className="hidden md:flex"
-              >
-                <Grid3X3 className="w-4 h-4 mr-2" />
-                Classic View
-              </Button>
-
-              <Button 
-                variant="ghost"
-                size="sm"
-                onClick={() => setShowThemeSelector(!showThemeSelector)}
-              >
-                <Settings className="w-4 h-4 mr-2" />
-                Themes
-              </Button>
+              <div className="text-sm text-muted-foreground hidden md:block">
+                IST: {new Date().toLocaleString('en-IN', { timeZone: 'Asia/Kolkata', hour: '2-digit', minute:'2-digit', second: '2-digit', year:'numeric', month:'short', day:'numeric' })}
+              </div>
               
               <Button 
                 onClick={handleRefresh}
@@ -259,22 +239,41 @@ export default function DemoProfessional() {
         </div>
       </header>
 
-      {/* Theme Selector Modal */}
-      {showThemeSelector && (
-        <div className="fixed inset-0 bg-background/80 backdrop-blur-sm z-50 flex items-center justify-center p-4">
-          <div className="relative">
-            <Button 
-              variant="ghost"
-              size="sm"
-              onClick={() => setShowThemeSelector(false)}
-              className="absolute -top-2 -right-2 z-10"
-            >
-              ✕
-            </Button>
-            <ThemeSelector />
+      {/* Left Sidebar */}
+      <aside className="fixed left-0 top-[72px] bottom-0 w-64 border-r border-border/50 bg-card/60 backdrop-blur-sm hidden md:block">
+        <div className="p-4 space-y-6">
+          <div>
+            <h3 className="text-xs uppercase tracking-wide text-muted-foreground mb-2">Servers Environment</h3>
+            <div className="space-y-2">
+              {(['all','development','staging','production'] as const).map((env) => (
+                <button
+                  key={env}
+                  onClick={() => setEnvironmentFilter(env)}
+                  className={`w-full text-left px-3 py-2 rounded-md text-sm ${environmentFilter === env ? 'bg-primary/10 text-primary' : 'hover:bg-muted/40'}`}
+                >
+                  {env[0].toUpperCase() + env.slice(1)}
+                </button>
+              ))}
+            </div>
+          </div>
+          <div>
+            <h3 className="text-xs uppercase tracking-wide text-muted-foreground mb-2">Company</h3>
+            <div className="space-y-2">
+              <button className="w-full text-left px-3 py-2 rounded-md text-sm hover:bg-muted/40">Overview</button>
+              <button className="w-full text-left px-3 py-2 rounded-md text-sm hover:bg-muted/40">Teams</button>
+              <button className="w-full text-left px-3 py-2 rounded-md text-sm hover:bg-muted/40">Settings</button>
+            </div>
+          </div>
+          <div>
+            <h3 className="text-xs uppercase tracking-wide text-muted-foreground mb-2">Help & Support</h3>
+            <div className="space-y-2">
+              <a href="https://letsencrypt.org/docs/" target="_blank" className="block px-3 py-2 rounded-md text-sm hover:bg-muted/40">SSL Docs</a>
+              <a href="https://developer.mozilla.org/en-US/docs/Web/Security/Transport_Layer_Security" target="_blank" className="block px-3 py-2 rounded-md text-sm hover:bg-muted/40">TLS Guide</a>
+              <a href="mailto:support@example.com" className="block px-3 py-2 rounded-md text-sm hover:bg-muted/40">Contact Support</a>
+            </div>
           </div>
         </div>
-      )}
+      </aside>
 
       {/* Add Domain Modal */}
       <AddDomainModal
@@ -289,7 +288,7 @@ export default function DemoProfessional() {
         onClose={() => setShowExpiredHistoryModal(false)}
       />
 
-      <div className="p-8 space-y-8">
+      <div className="md:ml-64 p-8 space-y-8">
         {/* Error Message */}
         {error && (
           <div className="p-4 bg-red-50 border border-red-200 rounded-xl flex items-center gap-3">
@@ -387,9 +386,33 @@ export default function DemoProfessional() {
           </Card>
         </div>
 
+        {environmentFilter === 'all' && (
+          <Card variant="elevated" animated className="border-0 shadow-xl">
+            <CardHeader>
+              <CardTitle className="text-sm font-medium text-muted-foreground">Environment Breakdown</CardTitle>
+            </CardHeader>
+            <CardContent>
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                <div>
+                  <p className="text-xs text-muted-foreground">Development</p>
+                  <p className="text-2xl font-semibold">{(stats as any).byEnvironment?.development ?? 0}</p>
+                </div>
+                <div>
+                  <p className="text-xs text-muted-foreground">Staging</p>
+                  <p className="text-2xl font-semibold">{(stats as any).byEnvironment?.staging ?? 0}</p>
+                </div>
+                <div>
+                  <p className="text-xs text-muted-foreground">Production</p>
+                  <p className="text-2xl font-semibold">{(stats as any).byEnvironment?.production ?? 0}</p>
+                </div>
+              </div>
+            </CardContent>
+          </Card>
+        )}
+
         {/* Status Overview */}
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-          <Card variant="elevated" className="lg:col-span-2 border-0 shadow-xl" animated>
+            <Card variant="elevated" className="lg:col-span-2 border-0 shadow-xl" animated>
             <CardHeader>
               <CardTitle className="flex items-center gap-3">
                 <Activity className="w-6 h-6 text-primary" />
@@ -404,7 +427,10 @@ export default function DemoProfessional() {
                       <div className="w-3 h-3 rounded-full bg-gradient-to-br from-primary to-primary-foreground shadow-md"></div>
                       <div>
                         <p className="font-medium text-foreground text-lg">{alert.domain}</p>
-                        <p className="text-sm text-muted-foreground">Expires {formatDate(alert.expiryDate)}</p>
+                        <p className="text-sm text-muted-foreground">
+                          Expires {formatDate(alert.expiryDate)}
+                          {alert.environment ? ` • ${alert.environment}` : ''}
+                        </p>
                       </div>
                     </div>
                     <div className="flex items-center gap-3">
@@ -413,6 +439,14 @@ export default function DemoProfessional() {
                         daysUntilExpiry={alert.daysUntilExpiry}
                         animated
                       />
+                      <Button
+                        variant="outline"
+                        size="sm"
+                        onClick={() => handleRefreshDomain(alert.id)}
+                        className="text-muted-foreground"
+                      >
+                        Renew
+                      </Button>
                       <Button
                         variant="ghost"
                         size="sm"

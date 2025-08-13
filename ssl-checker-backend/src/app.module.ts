@@ -27,7 +27,7 @@ import { SeedingModule } from "./modules/seeding/seeding.module";
       isGlobal: true,
       validate,
       validationOptions: {
-        allowUnknown: false,
+        allowUnknown: true,
         abortEarly: true,
       },
     }),

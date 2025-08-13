@@ -77,6 +77,7 @@ export class SSLService {
         status: sslResult.status,
         lastChecked: new Date(),
         createdBy: new Types.ObjectId(userId),
+        environment: (createSSLDto as any).environment || "production",
         issuer: sslResult.issuer,
         serialNumber: sslResult.serialNumber,
         errorMessage: sslResult.errorMessage,

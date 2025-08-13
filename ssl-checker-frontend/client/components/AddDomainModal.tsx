@@ -34,9 +34,23 @@ export const AddDomainModal: React.FC<AddDomainModalProps> = ({
   const [isAdding, setIsAdding] = useState(false);
   const [checkResult, setCheckResult] = useState<DomainCheckResult | null>(null);
   const [error, setError] = useState('');
+  const [environment, setEnvironment] = useState<'development' | 'staging' | 'production'>('production');
 
-  const validateDomain = (domain: string): boolean => {
-    const domainRegex = /^([a-zA-Z0-9-]+\.)+[a-zA-Z]{2,}$/;
+  const normalizeDomain = (value: string): string => {
+    return value
+      .trim()
+      .toLowerCase()
+      .replace(/^https?:\/\//, '') // remove protocol
+      .replace(/^www\./, '') // remove www
+      .replace(/\/$/, '') // remove trailing slash
+      .replace(/\/.*$/, '') // strip path
+      .replace(/:\d+$/, ''); // strip port
+  };
+
+  const validateDomain = (raw: string): boolean => {
+    const domain = normalizeDomain(raw);
+    // Allow multi-level TLDs like .co.in and common ccTLDs (.in, .uk, .com, etc.)
+    const domainRegex = /^(?=.{1,253}$)(?!-)[A-Za-z0-9-]{1,63}(?<!-)(\.(?!-)[A-Za-z0-9-]{1,63}(?<!-))+$/;
     return domainRegex.test(domain);
   };
 
@@ -56,7 +70,9 @@ export const AddDomainModal: React.FC<AddDomainModalProps> = ({
     setCheckResult(null);
 
     try {
-      const result = await sslService.checkDomain(domain);
+      const clean = normalizeDomain(domain);
+      setDomain(clean);
+      const result = await sslService.checkDomain(clean);
       setCheckResult(result);
       toast({ title: 'Domain checked', description: `${domain} status: ${result.status}` });
     } catch (err: any) {
@@ -72,7 +88,8 @@ export const AddDomainModal: React.FC<AddDomainModalProps> = ({
 
     setIsAdding(true);
     try {
-      await sslService.createAlert({ domain });
+      const clean = normalizeDomain(domain);
+      await sslService.createAlert({ domain: clean, environment } as any);
       onSuccess();
       onClose();
       setDomain('');
@@ -160,6 +177,18 @@ export const AddDomainModal: React.FC<AddDomainModalProps> = ({
                 )}
                 Check
               </Button>
+            </div>
+            <div className="flex items-center gap-3">
+              <label className="text-sm font-medium text-foreground">Environment</label>
+              <select
+                className="border rounded-md px-2 py-1 bg-background"
+                value={environment}
+                onChange={(e) => setEnvironment(e.target.value as any)}
+              >
+                <option value="development">Development</option>
+                <option value="staging">Staging</option>
+                <option value="production">Production</option>
+              </select>
             </div>
             {error && (
               <p className="text-sm text-red-600 flex items-center gap-1">
@@ -249,11 +278,10 @@ export const AddDomainModal: React.FC<AddDomainModalProps> = ({
                 <Button
                   onClick={handleAddDomain}
                   loading={isAdding}
-                  disabled={!checkResult.isValid}
                   className="flex-1"
                 >
                   <Plus className="w-4 h-4 mr-2" />
-                  Add to Monitoring
+                  {checkResult.isValid ? 'Add to Monitoring' : 'Add as Expired'}
                 </Button>
                 <Button
                   variant="outline"

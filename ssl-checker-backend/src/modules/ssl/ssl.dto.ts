@@ -23,9 +23,20 @@ export class CreateSSLDto {
       ?.toLowerCase()
       .trim()
       .replace(/^https?:\/\//, "")
+      .replace(/^www\./, "")
       .replace(/\/$/, "")
+      .replace(/\/.*$/, "")
+      .replace(/:\\d+$/, "")
   )
   domain: string;
+
+  @ApiPropertyOptional({
+    enum: ["development", "staging", "production"],
+    description: "Environment tag for the SSL record",
+  })
+  @IsOptional()
+  @IsString()
+  environment?: "development" | "staging" | "production";
 }
 
 export class UpdateSSLDto {
@@ -44,6 +55,14 @@ export class UpdateSSLDto {
       .replace(/\/$/, "")
   )
   domain?: string;
+
+  @ApiPropertyOptional({
+    enum: ["development", "staging", "production"],
+    description: "Environment tag for the SSL record",
+  })
+  @IsOptional()
+  @IsString()
+  environment?: "development" | "staging" | "production";
 
   @ApiPropertyOptional({
     example: "2025-12-31T23:59:59.000Z",
@@ -69,6 +88,10 @@ export class UpdateSSLDto {
   @IsEnum(SSLStatus)
   status?: SSLStatus;
 
+  @ApiPropertyOptional({
+    enum: ["development", "staging", "production"],
+    description: "Filter by environment",
+  })
   @ApiPropertyOptional({
     example: "Let's Encrypt",
     description: "Certificate issuer",

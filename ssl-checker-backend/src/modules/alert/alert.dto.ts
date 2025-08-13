@@ -26,10 +26,23 @@ export class CreateAlertDto {
       .replace(/^https?:\/\//, "")
       .replace(/\/$/, "")
   )
-  @Matches(/^([a-zA-Z0-9-]+\.)+[a-zA-Z]{2,}$/, {
-    message: "Please provide a valid domain name",
-  })
+  // Accept multi-level TLDs (.co.in) and common ccTLDs; strict RFC labels
+  @Matches(
+    /^(?=.{1,253}$)(?!-)[A-Za-z0-9-]{1,63}(?<!-)(\.(?!-)[A-Za-z0-9-]{1,63}(?<!-))+$/,
+    {
+      message: "Please provide a valid domain name",
+    }
+  )
   domain: string;
+
+  @ApiProperty({
+    required: false,
+    enum: ["development", "staging", "production"],
+    description: "Environment tag for the SSL record",
+  })
+  @IsOptional()
+  @IsString()
+  environment?: "development" | "staging" | "production";
 }
 
 export class UpdateAlertDto extends PartialType(CreateAlertDto) {}
@@ -88,6 +101,15 @@ export class AlertQueryDto {
   @IsNumber()
   @Min(0)
   daysRemaining?: number;
+
+  @ApiProperty({
+    required: false,
+    enum: ["development", "staging", "production"],
+    description: "Filter by environment",
+  })
+  @IsOptional()
+  @IsString()
+  environment?: "development" | "staging" | "production";
 }
 
 export class CheckDomainDto {

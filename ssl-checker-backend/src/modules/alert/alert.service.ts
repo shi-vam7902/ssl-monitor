@@ -75,7 +75,7 @@ export class AlertService {
     this.logger.log(`Checking SSL certificate for new domain: ${domain}`);
     const sslResult = await this.sslCheckerService.checkDomainSSL(domain);
 
-    // Create alert record
+    // Create alert record even if expired/invalid
     const alert = new this.sslRecordModel({
       domain: sslResult.domain,
       expiryDate: sslResult.expiryDate,
@@ -83,6 +83,7 @@ export class AlertService {
       status: sslResult.status,
       lastChecked: new Date(),
       createdBy: userId,
+      environment: (createAlertDto as any).environment || "production",
       issuer: sslResult.issuer,
       serialNumber: sslResult.serialNumber,
       errorMessage: sslResult.errorMessage,
@@ -110,6 +111,11 @@ export class AlertService {
     // Filter by status
     if (status) {
       filter.status = status;
+    }
+
+    // Filter by environment
+    if ((queryDto as any).environment) {
+      filter.environment = (queryDto as any).environment;
     }
 
     // Filter by days remaining
@@ -301,32 +307,47 @@ export class AlertService {
   /**
    * Get dashboard statistics
    */
-  async getDashboardStats(): Promise<any> {
+  async getDashboardStats(
+    environment?: "development" | "staging" | "production"
+  ): Promise<any> {
+    const base: any = { isActive: true };
+    if (environment) base.environment = environment;
     const [
       totalDomains,
       validCertificates,
       expiringCertificates,
       expiredCertificates,
       recentlyChecked,
+      byEnvAgg,
     ] = await Promise.all([
-      this.sslRecordModel.countDocuments({ isActive: true }),
+      this.sslRecordModel.countDocuments(base),
+      this.sslRecordModel.countDocuments({ ...base, status: SSLStatus.VALID }),
       this.sslRecordModel.countDocuments({
-        isActive: true,
-        status: SSLStatus.VALID,
-      }),
-      this.sslRecordModel.countDocuments({
-        isActive: true,
+        ...base,
         status: SSLStatus.EXPIRING,
       }),
       this.sslRecordModel.countDocuments({
-        isActive: true,
+        ...base,
         status: SSLStatus.EXPIRED,
       }),
       this.sslRecordModel.countDocuments({
-        isActive: true,
+        ...base,
         lastChecked: { $gte: new Date(Date.now() - 24 * 60 * 60 * 1000) },
       }),
+      this.sslRecordModel.aggregate([
+        { $match: base },
+        { $group: { _id: "$environment", count: { $sum: 1 } } },
+      ]),
     ]);
+
+    const byEnvironment: Record<string, number> = {
+      development: 0,
+      staging: 0,
+      production: 0,
+    };
+    for (const doc of byEnvAgg) {
+      if (doc && doc._id) byEnvironment[doc._id] = doc.count;
+    }
 
     return {
       totalDomains,
@@ -334,6 +355,7 @@ export class AlertService {
       expiringCertificates,
       expiredCertificates,
       recentlyChecked,
+      byEnvironment,
     };
   }
 

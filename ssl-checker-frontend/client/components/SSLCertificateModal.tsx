@@ -105,13 +105,13 @@ export const SSLCertificateModal: React.FC<SSLCertificateModalProps> = ({
   const getStatusColor = (status: string) => {
     switch (status) {
       case 'valid':
-        return 'text-green-600 bg-green-50';
+        return 'text-green-500 bg-green-500/10';
       case 'expiring_soon':
-        return 'text-yellow-600 bg-yellow-50';
+        return 'text-yellow-500 bg-yellow-500/10';
       case 'expired':
-        return 'text-red-600 bg-red-50';
+        return 'text-red-500 bg-red-500/10';
       default:
-        return 'text-gray-600 bg-gray-50';
+        return 'text-muted-foreground bg-muted/30';
     }
   };
 
@@ -195,12 +195,12 @@ export const SSLCertificateModal: React.FC<SSLCertificateModalProps> = ({
 
                 <div className="space-y-2">
                   <div className="flex items-center gap-2">
-                    <Calendar className="h-5 w-5 text-gray-600" />
+                    <Calendar className="h-5 w-5 text-muted-foreground" />
                     <span className="font-medium">Expires</span>
                   </div>
                   <div className="text-sm">
                     <p className="font-medium">{formatDate(alert.expiryDate)}</p>
-                    <p className="text-gray-600">
+                    <p className="text-muted-foreground">
                       {alert.daysUntilExpiry > 0
                         ? `${alert.daysUntilExpiry} days remaining`
                         : `Expired ${Math.abs(alert.daysUntilExpiry)} days ago`}
@@ -210,20 +210,32 @@ export const SSLCertificateModal: React.FC<SSLCertificateModalProps> = ({
 
                 <div className="space-y-2">
                   <div className="flex items-center gap-2">
-                    <Activity className="h-5 w-5 text-gray-600" />
+                    <Activity className="h-5 w-5 text-muted-foreground" />
                     <span className="font-medium">Last Checked</span>
                   </div>
                   <div className="text-sm">
                     <p className="font-medium">{formatDate(alert.lastChecked)}</p>
                   </div>
                 </div>
+                
+                {alert.environment && (
+                  <div className="space-y-2">
+                    <div className="flex items-center gap-2">
+                      <Server className="h-5 w-5 text-muted-foreground" />
+                      <span className="font-medium">Environment</span>
+                    </div>
+                    <div className="text-sm">
+                      <Badge variant="outline" className="capitalize">{alert.environment}</Badge>
+                    </div>
+                  </div>
+                )}
               </div>
 
               {/* Progress Bar */}
               <div className="mt-4">
                 <div className="flex items-center justify-between mb-2">
                   <span className="text-sm font-medium">Certificate Lifetime</span>
-                  <span className="text-sm text-gray-600">
+                  <span className="text-sm text-muted-foreground">
                     {alert.daysUntilExpiry > 0 ? `${alert.daysUntilExpiry} days left` : 'Expired'}
                   </span>
                 </div>
@@ -262,9 +274,9 @@ export const SSLCertificateModal: React.FC<SSLCertificateModalProps> = ({
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                       <div className="space-y-3">
                         <div>
-                          <label className="text-sm font-medium text-gray-600">Domain</label>
+                          <label className="text-sm font-medium text-muted-foreground">Domain</label>
                           <div className="flex items-center gap-2 mt-1">
-                            <p className="font-mono text-sm bg-gray-50 p-2 rounded flex-1">
+                            <p className="font-mono text-sm bg-muted/30 p-2 rounded flex-1">
                               {alert.domain}
                             </p>
                             <Button
@@ -278,9 +290,9 @@ export const SSLCertificateModal: React.FC<SSLCertificateModalProps> = ({
                         </div>
 
                         <div>
-                          <label className="text-sm font-medium text-gray-600">Serial Number</label>
+                          <label className="text-sm font-medium text-muted-foreground">Serial Number</label>
                           <div className="flex items-center gap-2 mt-1">
-                            <p className="font-mono text-sm bg-gray-50 p-2 rounded flex-1">
+                            <p className="font-mono text-sm bg-muted/30 p-2 rounded flex-1">
                               {alert.serialNumber || detailedInfo?.serialNumber || 'N/A'}
                             </p>
                             <Button
@@ -299,8 +311,8 @@ export const SSLCertificateModal: React.FC<SSLCertificateModalProps> = ({
                         </div>
 
                         <div>
-                          <label className="text-sm font-medium text-gray-600">Algorithm</label>
-                          <p className="mt-1 font-mono text-sm bg-gray-50 p-2 rounded">
+                          <label className="text-sm font-medium text-muted-foreground">Algorithm</label>
+                          <p className="mt-1 font-mono text-sm bg-muted/30 p-2 rounded">
                             {alert.certificate || 'SHA-256'}
                           </p>
                         </div>
@@ -308,23 +320,23 @@ export const SSLCertificateModal: React.FC<SSLCertificateModalProps> = ({
 
                       <div className="space-y-3">
                         <div>
-                          <label className="text-sm font-medium text-gray-600">Valid From</label>
-                          <p className="mt-1 text-sm bg-green-50 p-2 rounded">
+                          <label className="text-sm font-medium text-muted-foreground">Valid From</label>
+                          <p className="mt-1 text-sm bg-green-500/10 p-2 rounded">
                             {/* This would come from detailed cert info */}
                             Issued Date (requires cert details)
                           </p>
                         </div>
 
                         <div>
-                          <label className="text-sm font-medium text-gray-600">Valid Until</label>
-                          <p className="mt-1 text-sm bg-red-50 p-2 rounded">
+                          <label className="text-sm font-medium text-muted-foreground">Valid Until</label>
+                          <p className="mt-1 text-sm bg-red-500/10 p-2 rounded">
                             {formatDate(alert.expiryDate)}
                           </p>
                         </div>
 
                         <div>
-                          <label className="text-sm font-medium text-gray-600">Key Size</label>
-                          <p className="mt-1 font-mono text-sm bg-gray-50 p-2 rounded">
+                          <label className="text-sm font-medium text-muted-foreground">Key Size</label>
+                          <p className="mt-1 font-mono text-sm bg-muted/30 p-2 rounded">
                             2048 bits (RSA)
                           </p>
                         </div>
@@ -346,14 +358,14 @@ export const SSLCertificateModal: React.FC<SSLCertificateModalProps> = ({
                 <CardContent>
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div>
-                      <label className="text-sm font-medium text-gray-600">Issuer</label>
-                      <p className="mt-1 text-sm bg-blue-50 p-3 rounded font-medium">
+                      <label className="text-sm font-medium text-muted-foreground">Issuer</label>
+                      <p className="mt-1 text-sm bg-primary/10 p-3 rounded font-medium">
                         {alert.issuer || detailedInfo?.issuer || 'Loading...'}
                       </p>
                     </div>
 
                     <div>
-                      <label className="text-sm font-medium text-gray-600">Authority</label>
+                      <label className="text-sm font-medium text-muted-foreground">Authority</label>
                       <div className="mt-1 flex items-center gap-2">
                         <Shield className="h-4 w-4 text-green-600" />
                         <span className="text-sm">Trusted CA</span>
@@ -361,15 +373,15 @@ export const SSLCertificateModal: React.FC<SSLCertificateModalProps> = ({
                     </div>
 
                     <div>
-                      <label className="text-sm font-medium text-gray-600">Validation Type</label>
+                      <label className="text-sm font-medium text-muted-foreground">Validation Type</label>
                       <Badge variant="outline" className="mt-1">
                         Domain Validated
                       </Badge>
                     </div>
 
                     <div>
-                      <label className="text-sm font-medium text-gray-600">Chain Length</label>
-                      <p className="mt-1 text-sm">3 certificates</p>
+                      <label className="text-sm font-medium text-muted-foreground">Chain Length</label>
+                      <p className="mt-1 text-sm text-muted-foreground">3 certificates</p>
                     </div>
                   </div>
                 </CardContent>
@@ -389,7 +401,7 @@ export const SSLCertificateModal: React.FC<SSLCertificateModalProps> = ({
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                       <div className="space-y-3">
                         <div>
-                          <label className="text-sm font-medium text-gray-600">Encryption</label>
+                          <label className="text-sm font-medium text-muted-foreground">Encryption</label>
                           <div className="mt-1 flex items-center gap-2">
                             <CheckCircle className="h-4 w-4 text-green-600" />
                             <span className="text-sm">RSA 2048-bit</span>
@@ -397,22 +409,22 @@ export const SSLCertificateModal: React.FC<SSLCertificateModalProps> = ({
                         </div>
 
                         <div>
-                          <label className="text-sm font-medium text-gray-600">Signature Algorithm</label>
-                          <p className="mt-1 text-sm">{alert.certificate || 'SHA-256 with RSA'}</p>
+                          <label className="text-sm font-medium text-muted-foreground">Signature Algorithm</label>
+                          <p className="mt-1 text-sm text-muted-foreground">{alert.certificate || 'SHA-256 with RSA'}</p>
                         </div>
                       </div>
 
                       <div className="space-y-3">
                         <div>
-                          <label className="text-sm font-medium text-gray-600">Protocol Support</label>
+                          <label className="text-sm font-medium text-muted-foreground">Protocol Support</label>
                           <div className="mt-1 space-y-1">
                             <div className="flex items-center gap-2">
                               <CheckCircle className="h-4 w-4 text-green-600" />
-                              <span className="text-sm">TLS 1.2</span>
+                              <span className="text-sm text-muted-foreground">TLS 1.2</span>
                             </div>
                             <div className="flex items-center gap-2">
                               <CheckCircle className="h-4 w-4 text-green-600" />
-                              <span className="text-sm">TLS 1.3</span>
+                              <span className="text-sm text-muted-foreground">TLS 1.3</span>
                             </div>
                           </div>
                         </div>
@@ -420,12 +432,12 @@ export const SSLCertificateModal: React.FC<SSLCertificateModalProps> = ({
                     </div>
 
                     {detailedInfo?.errorMessage && (
-                      <div className="bg-red-50 border border-red-200 p-3 rounded-lg">
+                      <div className="bg-red-500/10 border border-red-500/20 p-3 rounded-lg">
                         <div className="flex items-center gap-2">
                           <XCircle className="h-4 w-4 text-red-600" />
-                          <span className="text-sm font-medium text-red-800">Security Issue</span>
+                          <span className="text-sm font-medium text-red-600">Security Issue</span>
                         </div>
-                        <p className="text-sm text-red-700 mt-1">{detailedInfo.errorMessage}</p>
+                        <p className="text-sm text-red-600 mt-1">{detailedInfo.errorMessage}</p>
                       </div>
                     )}
                   </div>
