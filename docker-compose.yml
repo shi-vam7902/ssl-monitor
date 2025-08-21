@@ -1,0 +1,41 @@
+version: '3.8'
+
+services:
+  ssl-monitor:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "80:80"      # Frontend (nginx)
+      - "5003:5003"  # Backend API (direct access)
+    environment:
+      - NODE_ENV=production
+    volumes:
+      # Optional: Mount logs for debugging
+      - ./logs:/var/log
+      # Optional: Mount environment files for easy updates
+      - ./ssl-checker-backend/.env.development:/app/backend/.env
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+
+  # Optional: MongoDB service (if you want to run MongoDB in Docker)
+  mongodb:
+    image: mongo:7.0
+    ports:
+      - "27017:27017"
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: password
+    volumes:
+      - mongodb_data:/data/db
+    restart: unless-stopped
+    profiles:
+      - with-db
+
+volumes:
+  mongodb_data:

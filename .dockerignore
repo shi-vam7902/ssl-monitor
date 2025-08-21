@@ -24,7 +24,7 @@ pids
 *.seed
 *.pid.lock
 
-# Coverage directory
+# Coverage directory used by tools like istanbul
 coverage
 *.lcov
 
@@ -40,13 +40,22 @@ jspm_packages/
 # Optional eslint cache
 .eslintcache
 
+# Microbundle cache
+.rpt2_cache/
+.rts2_cache_cjs/
+.rts2_cache_es/
+.rts2_cache_umd/
+
+# Optional REPL history
+.node_repl_history
+
 # Output of 'npm pack'
 *.tgz
 
 # Yarn Integrity file
 .yarn-integrity
 
-# parcel-bundler cache
+# parcel-bundler cache (https://parceljs.org/)
 .cache
 .parcel-cache
 
@@ -105,6 +114,3 @@ __tests__/
 .prettierrc*
 jest.config.*
 tsconfig.json
-
-# Netlify
-netlify/

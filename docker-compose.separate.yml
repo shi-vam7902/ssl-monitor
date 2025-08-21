@@ -1,0 +1,100 @@
+version: '3.8'
+
+services:
+  # Backend service
+  backend:
+    build:
+      context: ./ssl-checker-backend
+      dockerfile: Dockerfile
+    container_name: ssl-monitor-backend
+    ports:
+      - "5003:5003"
+    environment:
+      - NODE_ENV=production
+      - APP_URL=http://localhost:5003
+      - PORT=5003
+      - CREDENTIALS=true
+      - ORIGIN=http://localhost:8080
+      - MONGO_DB_URL=mongodb+srv://root:Qwerty%4079022601@ssl-monitor.l4qxo6j.mongodb.net/ssl-monitor
+      - JWT_SECRET=your-super-secret-jwt-key-change-this-in-production
+      - JWT_EXPIRES_IN=7d
+      - SMTP_MAIL_HOST=smtp.gmail.com
+      - EMAIL_PORT=587
+      - SMTP_USERNAME=your-email@gmail.com
+      - SMTP_PASSWORD=your-password
+      - EMAIL_FROM=your-email@gmail.com
+      - LOG_DIR=./logs
+      - SSL_CHECK_INTERVAL_HOURS=24
+      - SSL_ALERT_THRESHOLD_DAYS=30
+    volumes:
+      - ./logs/backend:/app/logs
+      - ./ssl-checker-backend/.env.production:/app/.env
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "node", "-e", "require('http').get('http://localhost:5003/api/health', (res) => { process.exit(res.statusCode === 200 ? 0 : 1) })"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+    networks:
+      - ssl-monitor-network
+
+  # Frontend service
+  frontend:
+    build:
+      context: ./ssl-checker-frontend
+      dockerfile: Dockerfile
+    container_name: ssl-monitor-frontend
+    ports:
+      - "8080:80"
+    depends_on:
+      - backend
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "wget", "--no-verbose", "--tries=1", "--spider", "http://localhost/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+    networks:
+      - ssl-monitor-network
+
+  # Optional: MongoDB service
+  mongodb:
+    image: mongo:7.0
+    container_name: ssl-monitor-mongodb
+    ports:
+      - "27017:27017"
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: password
+      MONGO_INITDB_DATABASE: ssl-monitor
+    volumes:
+      - mongodb_data:/data/db
+    restart: unless-stopped
+    networks:
+      - ssl-monitor-network
+    profiles:
+      - with-db
+
+  # Optional: Redis for caching (if needed)
+  redis:
+    image: redis:7-alpine
+    container_name: ssl-monitor-redis
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+    restart: unless-stopped
+    networks:
+      - ssl-monitor-network
+    profiles:
+      - with-cache
+
+volumes:
+  mongodb_data:
+  redis_data:
+
+networks:
+  ssl-monitor-network:
+    driver: bridge
