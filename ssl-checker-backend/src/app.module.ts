@@ -19,6 +19,8 @@ import { AlertModule } from "./modules/alert/alert.module";
 import { SSLModule } from "./modules/ssl/ssl.module";
 import { SslCheckerService } from "./services/ssl-checker.service";
 import { SeedingModule } from "./modules/seeding/seeding.module";
+import { AppController } from "./app.controller";
+import { AppService } from "./app.service";
 
 @Module({
   imports: [
@@ -55,7 +57,9 @@ import { SeedingModule } from "./modules/seeding/seeding.module";
     SSLModule,
     SeedingModule,
   ],
+  controllers: [AppController],
   providers: [
+    AppService,
     {
       provide: APP_GUARD,
       useClass: JwtAuthGuard,

@@ -1,0 +1,80 @@
+{"context":"HTTP","level":"error","message":"GET /api/health 404 78 - NotFoundException : API%20request%20not%20found. -  ::1","stack":[null]}
+{"context":"HTTP","level":"error","message":"GET /api/health 404 78 - NotFoundException : API%20request%20not%20found. -  ::1","stack":[null]}
+{"context":"HTTP","level":"error","message":"GET /api/health 404 78 - NotFoundException : API%20request%20not%20found. -  ::1","stack":[null]}
+{"context":"HTTP","level":"error","message":"GET /api/alerts 401 76 - UnauthorizedException : Please%20authenticate. - curl/8.15.0 ::ffff:172.19.0.1","stack":[null]}
+{"context":"HTTP","level":"error","message":"GET /api/health 404 78 - NotFoundException : API%20request%20not%20found. -  ::1","stack":[null]}
+{"context":"HTTP","level":"error","message":"GET /api/health 404 78 - NotFoundException : API%20request%20not%20found. -  ::1","stack":[null]}
+{"context":"HTTP","level":"error","message":"GET /api/health 404 78 - NotFoundException : API%20request%20not%20found. -  ::1","stack":[null]}
+{"context":"HTTP","level":"error","message":"GET /api/health 404 78 - NotFoundException : API%20request%20not%20found. -  ::1","stack":[null]}
+{"context":"HTTP","level":"error","message":"GET /api/health 404 78 - NotFoundException : API%20request%20not%20found. -  ::1","stack":[null]}
+{"context":"HTTP","level":"error","message":"GET /api/health 404 78 - NotFoundException : API%20request%20not%20found. -  ::1","stack":[null]}
+{"context":"HTTP","level":"error","message":"GET /api/health 404 78 - NotFoundException : API%20request%20not%20found. -  ::1","stack":[null]}
+{"context":"HTTP","level":"error","message":"GET /api/health 404 78 - NotFoundException : API%20request%20not%20found. -  ::1","stack":[null]}
+{"context":"HTTP","level":"error","message":"GET /api/health 404 78 - NotFoundException : API%20request%20not%20found. -  ::1","stack":[null]}
+{"context":"EmailService","level":"error","message":"Failed to send SSL alert email for getyolo.glasier.co.in:","stack":[{"code":"EAUTH","command":"AUTH PLAIN","response":"535-5.7.8 Username and Password not accepted. For more information, go to\n535 5.7.8  https://support.google.com/mail/?p=BadCredentials d9443c01a7336-245ed53e779sm47095175ad.160 - gsmtp","responseCode":535}]}
+{"context":"CronJobsService","level":"error","message":"Failed to send email notification for domain getyolo.glasier.co.in:","stack":[{"code":"EAUTH","command":"AUTH PLAIN","response":"535-5.7.8 Username and Password not accepted. For more information, go to\n535 5.7.8  https://support.google.com/mail/?p=BadCredentials d9443c01a7336-245ed53e779sm47095175ad.160 - gsmtp","responseCode":535}]}
+{"context":"EmailService","level":"error","message":"Failed to send daily summary report:","stack":[{"code":"EAUTH","command":"AUTH PLAIN","response":"535-5.7.8 Username and Password not accepted. For more information, go to\n535 5.7.8  https://support.google.com/mail/?p=BadCredentials d9443c01a7336-245ed514ec6sm47323855ad.136 - gsmtp","responseCode":535}]}
+{"context":"CronJobsService","level":"error","message":"Failed to send daily summary report:","stack":[{"code":"EAUTH","command":"AUTH PLAIN","response":"535-5.7.8 Username and Password not accepted. For more information, go to\n535 5.7.8  https://support.google.com/mail/?p=BadCredentials d9443c01a7336-245ed514ec6sm47323855ad.136 - gsmtp","responseCode":535}]}
+{"context":"EmailService","level":"error","message":"Failed to send SSL alert email for monitor.glasier.co.in:","stack":[{"code":"EAUTH","command":"AUTH PLAIN","response":"535-5.7.8 Username and Password not accepted. For more information, go to\n535 5.7.8  https://support.google.com/mail/?p=BadCredentials d9443c01a7336-24615b25fddsm5406855ad.138 - gsmtp","responseCode":535}]}
+{"context":"CronJobsService","level":"error","message":"Failed to send email notification for domain monitor.glasier.co.in:","stack":[{"code":"EAUTH","command":"AUTH PLAIN","response":"535-5.7.8 Username and Password not accepted. For more information, go to\n535 5.7.8  https://support.google.com/mail/?p=BadCredentials d9443c01a7336-24615b25fddsm5406855ad.138 - gsmtp","responseCode":535}]}
+{"context":"EmailService","level":"error","message":"Failed to send SSL alert email for view-crest-property-dev.glasier.co.in:","stack":[{"code":"EAUTH","command":"AUTH PLAIN","response":"535-5.7.8 Username and Password not accepted. For more information, go to\n535 5.7.8  https://support.google.com/mail/?p=BadCredentials d9443c01a7336-245ed4cdb8csm47728995ad.97 - gsmtp","responseCode":535}]}
+{"context":"CronJobsService","level":"error","message":"Failed to send email notification for domain view-crest-property-dev.glasier.co.in:","stack":[{"code":"EAUTH","command":"AUTH PLAIN","response":"535-5.7.8 Username and Password not accepted. For more information, go to\n535 5.7.8  https://support.google.com/mail/?p=BadCredentials d9443c01a7336-245ed4cdb8csm47728995ad.97 - gsmtp","responseCode":535}]}
+{"context":"HTTP","level":"error","message":"GET /api/health 404 78 - NotFoundException : API%20request%20not%20found. -  ::1","stack":[null]}
+{"context":"HTTP","level":"error","message":"GET /api/health 404 78 - NotFoundException : API%20request%20not%20found. -  ::1","stack":[null]}
+{"context":"HTTP","level":"error","message":"GET /api/health 404 78 - NotFoundException : API%20request%20not%20found. -  ::1","stack":[null]}
+{"context":"HTTP","level":"error","message":"GET /api/health 404 78 - NotFoundException : API%20request%20not%20found. -  ::1","stack":[null]}
+{"context":"HTTP","level":"error","message":"GET /api/health 404 78 - NotFoundException : API%20request%20not%20found. -  ::1","stack":[null]}
+{"context":"HTTP","level":"error","message":"GET /api/health 404 78 - NotFoundException : API%20request%20not%20found. -  ::1","stack":[null]}
+{"context":"HTTP","level":"error","message":"GET /api/health 404 78 - NotFoundException : API%20request%20not%20found. -  ::1","stack":[null]}
+{"context":"HTTP","level":"error","message":"GET /api/health 404 78 - NotFoundException : API%20request%20not%20found. -  ::1","stack":[null]}
+{"context":"HTTP","level":"error","message":"GET /api/health 404 78 - NotFoundException : API%20request%20not%20found. -  ::1","stack":[null]}
+{"context":"HTTP","level":"error","message":"GET /api/health 404 78 - NotFoundException : API%20request%20not%20found. -  ::1","stack":[null]}
+{"context":"HTTP","level":"error","message":"GET /api/health 404 78 - NotFoundException : API%20request%20not%20found. -  ::1","stack":[null]}
+{"context":"HTTP","level":"error","message":"GET /api/health 404 78 - NotFoundException : API%20request%20not%20found. -  ::1","stack":[null]}
+{"context":"HTTP","level":"error","message":"GET /api/health 404 78 - NotFoundException : API%20request%20not%20found. -  ::1","stack":[null]}
+{"context":"HTTP","level":"error","message":"GET /api/health 404 78 - NotFoundException : API%20request%20not%20found. -  ::1","stack":[null]}
+{"context":"HTTP","level":"error","message":"GET /api/health 404 78 - NotFoundException : API%20request%20not%20found. -  ::1","stack":[null]}
+{"context":"HTTP","level":"error","message":"GET /api/health 404 78 - NotFoundException : API%20request%20not%20found. -  ::1","stack":[null]}
+{"context":"HTTP","level":"error","message":"GET /api/health 404 78 - NotFoundException : API%20request%20not%20found. -  ::1","stack":[null]}
+{"context":"HTTP","level":"error","message":"GET /api/health 404 78 - NotFoundException : API%20request%20not%20found. -  ::1","stack":[null]}
+{"context":"HTTP","level":"error","message":"GET /api/health 404 78 - NotFoundException : API%20request%20not%20found. -  ::1","stack":[null]}
+{"context":"HTTP","level":"error","message":"GET /api/health 404 78 - NotFoundException : API%20request%20not%20found. -  ::1","stack":[null]}
+{"context":"HTTP","level":"error","message":"GET /api/health 404 78 - NotFoundException : API%20request%20not%20found. -  ::1","stack":[null]}
+{"context":"HTTP","level":"error","message":"GET /api/health 404 78 - NotFoundException : API%20request%20not%20found. -  ::1","stack":[null]}
+{"context":"HTTP","level":"error","message":"GET /api/health 404 78 - NotFoundException : API%20request%20not%20found. -  ::1","stack":[null]}
+{"context":"HTTP","level":"error","message":"GET /api/health 404 78 - NotFoundException : API%20request%20not%20found. -  ::1","stack":[null]}
+{"context":"HTTP","level":"error","message":"GET /api/health 404 78 - NotFoundException : API%20request%20not%20found. -  ::1","stack":[null]}
+{"context":"HTTP","level":"error","message":"GET /api/health 404 78 - NotFoundException : API%20request%20not%20found. -  ::1","stack":[null]}
+{"context":"HTTP","level":"error","message":"GET /api/health 404 78 - NotFoundException : API%20request%20not%20found. -  ::1","stack":[null]}
+{"context":"HTTP","level":"error","message":"GET /api/health 404 78 - NotFoundException : API%20request%20not%20found. -  ::1","stack":[null]}
+{"context":"HTTP","level":"error","message":"GET /api/health 404 78 - NotFoundException : API%20request%20not%20found. -  ::1","stack":[null]}
+{"context":"HTTP","level":"error","message":"GET /api/health 404 78 - NotFoundException : API%20request%20not%20found. -  ::1","stack":[null]}
+{"context":"HTTP","level":"error","message":"GET /api/health 404 78 - NotFoundException : API%20request%20not%20found. -  ::1","stack":[null]}
+{"context":"HTTP","level":"error","message":"GET /api/health 404 78 - NotFoundException : API%20request%20not%20found. -  ::1","stack":[null]}
+{"context":"HTTP","level":"error","message":"GET /api/health 404 78 - NotFoundException : API%20request%20not%20found. -  ::1","stack":[null]}
+{"context":"HTTP","level":"error","message":"GET /api/health 404 78 - NotFoundException : API%20request%20not%20found. -  ::1","stack":[null]}
+{"context":"HTTP","level":"error","message":"GET /api/health 404 78 - NotFoundException : API%20request%20not%20found. -  ::1","stack":[null]}
+{"context":"HTTP","level":"error","message":"GET /api/health 404 78 - NotFoundException : API%20request%20not%20found. -  ::1","stack":[null]}
+{"context":"HTTP","level":"error","message":"GET /api/health 404 78 - NotFoundException : API%20request%20not%20found. -  ::1","stack":[null]}
+{"context":"HTTP","level":"error","message":"GET /api/health 404 78 - NotFoundException : API%20request%20not%20found. -  ::1","stack":[null]}
+{"context":"HTTP","level":"error","message":"GET /api/health 404 78 - NotFoundException : API%20request%20not%20found. -  ::1","stack":[null]}
+{"context":"HTTP","level":"error","message":"GET /api/health 404 78 - NotFoundException : API%20request%20not%20found. -  ::1","stack":[null]}
+{"context":"HTTP","level":"error","message":"GET /api/health 404 78 - NotFoundException : API%20request%20not%20found. -  ::1","stack":[null]}
+{"context":"HTTP","level":"error","message":"GET /api/health 404 78 - NotFoundException : API%20request%20not%20found. -  ::1","stack":[null]}
+{"context":"HTTP","level":"error","message":"GET /api/health 404 78 - NotFoundException : API%20request%20not%20found. - curl/8.15.0 ::ffff:172.19.0.1","stack":[null]}
+{"context":"HTTP","level":"error","message":"GET /api/health 404 78 - NotFoundException : API%20request%20not%20found. -  ::1","stack":[null]}
+{"context":"HTTP","level":"error","message":"GET /api/health 404 78 - NotFoundException : API%20request%20not%20found. -  ::1","stack":[null]}
+{"context":"HTTP","level":"error","message":"GET /api/health 404 78 - NotFoundException : API%20request%20not%20found. -  ::1","stack":[null]}
+{"context":"HTTP","level":"error","message":"GET /api/health 404 78 - NotFoundException : API%20request%20not%20found. -  ::1","stack":[null]}
+{"context":"HTTP","level":"error","message":"GET /api/health 404 78 - NotFoundException : API%20request%20not%20found. -  ::1","stack":[null]}
+{"context":"HTTP","level":"error","message":"GET /api/health 404 78 - NotFoundException : API%20request%20not%20found. -  ::1","stack":[null]}
+{"context":"HTTP","level":"error","message":"POST /api/auth/login 401 81 - UnauthorizedException : Invalid%20email%20or%20password - Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36 ::ffff:172.19.0.3","stack":[null]}
+{"context":"HTTP","level":"error","message":"POST /api/auth/login 401 81 - UnauthorizedException : Invalid%20email%20or%20password - Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36 ::ffff:172.19.0.3","stack":[null]}
+{"context":"HTTP","level":"error","message":"POST /api/auth/login 401 81 - UnauthorizedException : Invalid%20email%20or%20password - Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36 ::ffff:172.19.0.3","stack":[null]}
+{"context":"HTTP","level":"error","message":"POST /api/auth/login 401 81 - UnauthorizedException : Invalid%20email%20or%20password - Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:141.0) Gecko/20100101 Firefox/141.0 ::ffff:172.19.0.3","stack":[null]}
+{"context":"HTTP","level":"error","message":"POST /api/auth/login 401 81 - UnauthorizedException : Invalid%20email%20or%20password - Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:141.0) Gecko/20100101 Firefox/141.0 ::ffff:172.19.0.3","stack":[null]}
+{"context":"HTTP","level":"error","message":"POST /api/auth/login 401 81 - UnauthorizedException : Invalid%20email%20or%20password - Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:141.0) Gecko/20100101 Firefox/141.0 ::ffff:172.19.0.3","stack":[null]}
+{"context":"HTTP","level":"error","message":"POST /api/auth/login 401 81 - UnauthorizedException : Invalid%20email%20or%20password - Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:141.0) Gecko/20100101 Firefox/141.0 ::ffff:172.19.0.3","stack":[null]}
+{"context":"HTTP","level":"error","message":"POST /api/auth/login 401 81 - UnauthorizedException : Invalid%20email%20or%20password - Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:141.0) Gecko/20100101 Firefox/141.0 ::ffff:172.19.0.3","stack":[null]}
+{"context":"HTTP","level":"error","message":"POST /api/auth/login 401 81 - UnauthorizedException : Invalid%20email%20or%20password - Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:141.0) Gecko/20100101 Firefox/141.0 ::ffff:172.19.0.3","stack":[null]}
+{"context":"HTTP","level":"error","message":"POST /api/auth/login 401 81 - UnauthorizedException : Invalid%20email%20or%20password - Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:141.0) Gecko/20100101 Firefox/141.0 ::ffff:172.19.0.3","stack":[null]}
